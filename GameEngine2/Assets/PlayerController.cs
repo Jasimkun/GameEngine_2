@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private float stopSpeed = 0f;
 
-    private float jumpPower = 5f;
+    private float jumpPower = 7f;
 
     private float stopJumpPower = 0f;
 
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            jumpPower = 5f;
+            jumpPower = 7f;
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
