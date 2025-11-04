@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
 
     public Slider hpSlider;
 
+    public NoiseVoxelMap voxelMap;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,24 @@ public class PlayerController : MonoBehaviour
 
         currentHP = maxHP;
         hpSlider.value = 1f;
+
+        if (voxelMap != null)
+        {
+            int centerX = voxelMap.width / 2;
+            int centerZ = voxelMap.depth / 2;
+
+            float nx = (centerX + voxelMap.transform.position.x) / voxelMap.noiseScale;
+            float nz = (centerZ + voxelMap.transform.position.z) / voxelMap.noiseScale;
+            float noise = Mathf.PerlinNoise(nx, nz);
+            int centerHeight = Mathf.FloorToInt(noise * voxelMap.maxHeight);
+
+            transform.position = new Vector3(centerX, centerHeight + 2, centerZ);
+        }
+        else
+        {
+            Debug.LogWarning("NoiseVoxelMap 연결이 필요합니다.");
+        }
+
     }
 
     // Update is called once per frame
