@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2082772393142172434}
   - component: {fileID: 7519315625318020464}
   - component: {fileID: 5092484832923673109}
+  - component: {fileID: 14096220285447907}
   m_Layer: 0
-  m_Name: grass
-  m_TagString: Untagged
+  m_Name: Dirt
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ed3b7883cb156b4a8ec3a943eb38f16, type: 2}
+  - {fileID: 2100000, guid: 7acd916dcd7a0d94baa48e58741cd4e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,3 +106,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &14096220285447907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5792481177299588748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234c2eee7946845448edcc541d67e358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: "\uD759"
+  itemIcon: {fileID: 21300000, guid: cd3439f76d7643d4c8727c7d3034a501, type: 3}
+  maxStack: 7
+  type: 0
+  maxHP: 3
+  hp: 0
+  dropCount: 1
+  mineable: 1
+  itemPrefab: {fileID: 14096220285447907, guid: 6d03be9159b90b94c9de4afd24bbf658,
+    type: 3}
