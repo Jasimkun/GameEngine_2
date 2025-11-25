@@ -30,28 +30,16 @@ public class Block : MonoBehaviour
             gameObject.tag = "Block";
     }
 
-    public void Hit(int damage)
+    public void Hit(int damage, Inventory inven)
     {
         if (!mineable) return;
         hp -= damage;
         if (hp <= 0)
         {
+            if (inven != null && dropCount > 0)
+                inven.Add(type, dropCount);
 
-            if (InventoryManager.Instance != null)
-            {
-                if (itemPrefab == null)
-                {
-                    Debug.LogError(itemName + " 블록에 itemPrefab이 할당되지 않았습니다!");
-                    return;
-                }
-
-                bool added = InventoryManager.Instance.AddItem(itemPrefab, dropCount);
-
-                if (added)
-                {
-                    Destroy(gameObject);
-                }
-            }
+            Destroy(gameObject);
         }
     }
 }
