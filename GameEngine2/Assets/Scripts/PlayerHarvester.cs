@@ -14,6 +14,8 @@ public class PlayerHarvester : MonoBehaviour
     public Inventory inventory;
     InventoryUI invenUI;
 
+    public GameObject selectedBlock;
+
 
     private void Awake()
     {
@@ -26,10 +28,12 @@ public class PlayerHarvester : MonoBehaviour
     {
         if (invenUI.selectedIndex < 0)
         {
+            selectedBlock.transform.localScale = Vector3.zero;
+
             //선택된 idx가 -1이면 수확 모드
             if (Input.GetMouseButton(0) && Time.time >= _nextHitTime)
             {
-                Debug.Log("으엉");
+                //Debug.Log("으엉");
                 _nextHitTime = Time.time + hitCooldown;
 
                 Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));  //화면 중앙
@@ -45,6 +49,19 @@ public class PlayerHarvester : MonoBehaviour
         }
         else
         {
+            Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //화면 중앙
+            if(Physics.Raycast(rayDebug, out var hitDebug, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
+            {
+                Vector3Int placePos = AdjacentCellOnHitFace(hitDebug);
+                selectedBlock.transform.localScale = Vector3.one;
+                selectedBlock.transform.position = placePos;
+                selectedBlock.transform.rotation = Quaternion.identity;
+            }
+            else
+            {
+                selectedBlock.transform.localScale = Vector3.zero;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 //선택된 idx가 0 이상이면 설치 모드
