@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,13 +30,13 @@ public class PlayerHarvester : MonoBehaviour
         {
             selectedBlock.transform.localScale = Vector3.zero;
 
-            //¼±ÅÃµÈ idx°¡ -1ÀÌ¸é ¼öÈ® ¸ğµå
+            //ì„ íƒëœ idxê°€ -1ì´ë©´ ìˆ˜í™• ëª¨ë“œ
             if (Input.GetMouseButton(0) && Time.time >= _nextHitTime)
             {
-                //Debug.Log("À¸¾û");
+                //Debug.Log("ìœ¼ì—‰");
                 _nextHitTime = Time.time + hitCooldown;
 
-                Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));  //È­¸é Áß¾Ó
+                Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));  //í™”ë©´ ì¤‘ì•™
                 if (Physics.Raycast(ray, out var hit, rayDistance, hitMask))
                 {
                     var block = hit.collider.GetComponent<Block>();
@@ -49,7 +49,7 @@ public class PlayerHarvester : MonoBehaviour
         }
         else
         {
-            Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //È­¸é Áß¾Ó
+            Ray rayDebug = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //í™”ë©´ ì¤‘ì•™
             if(Physics.Raycast(rayDebug, out var hitDebug, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
             {
                 Vector3Int placePos = AdjacentCellOnHitFace(hitDebug);
@@ -64,13 +64,13 @@ public class PlayerHarvester : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                //¼±ÅÃµÈ idx°¡ 0 ÀÌ»óÀÌ¸é ¼³Ä¡ ¸ğµå
-                Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));  //È­¸é Áß¾Ó
+                //ì„ íƒëœ idxê°€ 0 ì´ìƒì´ë©´ ì„¤ì¹˜ ëª¨ë“œ
+                Ray ray = _cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));  //í™”ë©´ ì¤‘ì•™
                 if (Physics.Raycast(ray, out var hit, rayDistance, hitMask, QueryTriggerInteraction.Ignore))
                 {
                     Vector3Int placePos = AdjacentCellOnHitFace(hit);
 
-                    BlockType selected = invenUI.GetInventorySlot();
+                    ItemType selected = invenUI.GetInventorySlot();
                     if (inventory.Consume(selected, 1))
                     {
                         FindObjectOfType<NoiseVoxelMap>().PlaceTile(placePos, selected);
@@ -83,7 +83,7 @@ public class PlayerHarvester : MonoBehaviour
 
     static Vector3Int AdjacentCellOnHitFace(in RaycastHit hit)
     {
-        Vector3 baseCenter = hit.collider.transform.position;   //¸ÂÃá ºí·ÏÀÇ Áß½É
+        Vector3 baseCenter = hit.collider.transform.position;   //ë§ì¶˜ ë¸”ë¡ì˜ ì¤‘ì‹¬
         Vector3 adjCenter = baseCenter + hit.normal;
         return Vector3Int.RoundToInt(adjCenter);
     }

@@ -11,6 +11,9 @@ public class InventoryUI : MonoBehaviour
     public Sprite grassSprite;
     public Sprite waterSprite;
     public Sprite ironSprite;
+    public Sprite axeSprite;
+    public Sprite swordSprite;
+    public Sprite pickaxeSprite;
 
     public List<Transform> Slot = new List<Transform>();     //내 UI의 각 슬롯들의 리스트
     public GameObject SlotItem;     //슬롯 내부에 들어가는 아이템
@@ -39,17 +42,26 @@ public class InventoryUI : MonoBehaviour
 
             switch (item.Key)       //각 케이스별로 아이템 추가
             {
-                case BlockType.Dirt:
+                case ItemType.Dirt:
                     sItem.ItemSetting(dirtSprite, "x" + item.Value.ToString(), item.Key);
                     break;
-                case BlockType.Grass:
+                case ItemType.Grass:
                     sItem.ItemSetting(grassSprite, "x" + item.Value.ToString(), item.Key);
                     break;
-                case BlockType.Water:
+                case ItemType.Water:
                     sItem.ItemSetting(waterSprite, "x" + item.Value.ToString(), item.Key);
                     break;
-                case BlockType.Iron:
+                case ItemType.Iron:
                     sItem.ItemSetting(ironSprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Axe:
+                    sItem.ItemSetting(axeSprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Sword:
+                    sItem.ItemSetting(swordSprite, "x" + item.Value.ToString(), item.Key);
+                    break;
+                case ItemType.Pickaxe:
+                    sItem.ItemSetting(pickaxeSprite, "x" + item.Value.ToString(), item.Key);
                     break;
             }
             idx++;    //인덱스 한 칸 추가
@@ -97,8 +109,13 @@ public class InventoryUI : MonoBehaviour
     {
         Slot[_idx].GetComponent<Image>().color = Color.yellow;
     }
-    public BlockType GetInventorySlot()
+    public ItemType GetInventorySlot()
     {
         return items[selectedIndex].GetComponent<SlotItemPrefab>().blockType;
     }
+
+
+
+
+
 }
